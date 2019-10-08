@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">GuidApp</string>
+    <string name="title_activity_descricao_evento">DescricaoEvento</string>
+</resources>
