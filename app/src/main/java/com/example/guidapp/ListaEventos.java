@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class DescricaoEvento extends AppCompatActivity {
+public class ListaEventos extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_descricao_evento);
+        setContentView(R.layout.activity_lista_eventos);
     }
 }

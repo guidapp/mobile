@@ -13,6 +13,7 @@
         <activity android:name=".AlteraSenhaUsuario" />
         <activity android:name=".CadastroUsuario" />
         <activity android:name=".UsuarioPerfil" />
+        <activity android:name=".ListaEventos"></activity>
         <activity
             android:name=".DescricaoEvento"
             android:label="@string/title_activity_descricao_evento"
