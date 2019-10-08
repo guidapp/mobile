@@ -9,11 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginUsuario"></activity>
+        <activity android:name=".AreaVisitada" />
+        <activity android:name=".ListaEventos" />
+        <activity android:name=".LoginUsuario" />
         <activity android:name=".AlteraSenhaUsuario" />
         <activity android:name=".CadastroUsuario" />
         <activity android:name=".UsuarioPerfil" />
-        <activity android:name=".ListaEventos"></activity>
         <activity
             android:name=".DescricaoEvento"
             android:label="@string/title_activity_descricao_evento"
