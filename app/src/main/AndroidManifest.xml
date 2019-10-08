@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CadastroUsuario"></activity>
+        <activity android:name=".LoginUsuario"></activity>
+        <activity android:name=".AlteraSenhaUsuario" />
+        <activity android:name=".CadastroUsuario" />
         <activity android:name=".UsuarioPerfil" />
         <activity
             android:name=".DescricaoEvento"
