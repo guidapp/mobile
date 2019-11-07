@@ -19,26 +19,26 @@
         android:id="@+id/etNomePerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="210dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Fulano de tal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/btTrocarFoto" />
 
     <EditText
         android:id="@+id/etEmailPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="6dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="user@gmail.com"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/etNomePerfil" />
 
     <TextView
@@ -70,7 +70,9 @@
         android:layout_marginStart="76dp"
         android:layout_marginLeft="76dp"
         android:layout_marginTop="228dp"
+        android:layout_marginBottom="30dp"
         android:text="Nome"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,10 +91,11 @@
         android:id="@+id/btAlterarSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="125dp"
-        android:layout_marginRight="125dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:onClick="alterarSenha"
         android:text="Alterar senha"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/etEmailPerfil" />
 
     <Button
