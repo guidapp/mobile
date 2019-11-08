@@ -6,4 +6,5 @@
     <color name="white">#FFFFFF</color>
     <color name="nav_botao">#6DC1EC</color>
     <color name="nav_pagina_atual">#FCE751</color>
+    <color name="cor_de_fundo">#FCE751</color>
 </resources>

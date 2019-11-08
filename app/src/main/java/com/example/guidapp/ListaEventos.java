@@ -18,4 +18,8 @@ public class ListaEventos extends AppCompatActivity {
         Intent intent = new Intent(this, DescricaoEvento.class);
         startActivity(intent);
     }
+
+    public void voltar (View v) {
+        finish();
+    }
 }
