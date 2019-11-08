@@ -170,34 +170,50 @@
         android:clickable="true"
         android:onClick="listaEventos"
         app:backgroundTint="@color/design_default_color_primary"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btNavPerfil"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:id="@+id/btNavMapa"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="perfil"
-        android:text="Perfil"
+        android:background="@color/nav_botao"
+        android:text="Mapa"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btNavRoteiro"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="118dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/colorPrimaryDark"
-        android:onClick="areaVisitada"
-        android:text="Área visitada"
+        android:id="@+id/btNavRoteiro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/nav_pagina_atual"
+        android:text="Roteiro"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button" />
+        app:layout_constraintEnd_toStartOf="@id/btNavProgresso"
+        app:layout_constraintStart_toEndOf="@id/btNavMapa" />
+
+    <Button
+        android:id="@+id/btNavProgresso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/nav_botao"
+        android:onClick="areaVisitada"
+        android:text="Progresso"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btNavPerfil"
+        app:layout_constraintStart_toEndOf="@id/btNavRoteiro" />
+
+    <Button
+        android:id="@+id/btNavPerfil"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/nav_botao"
+        android:onClick="perfil"
+        android:text="Perfil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btNavProgresso" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

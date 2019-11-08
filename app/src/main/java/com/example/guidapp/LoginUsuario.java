@@ -21,11 +21,11 @@ public class LoginUsuario extends AppCompatActivity {
     }
 
     public void login(View v) {
-        Intent it = new Intent(this, Roteiro.class);
-        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        it.putExtra("nome", loginText.getText().toString());
-        it.putExtra("senha", senhaText.getText().toString());
-        startActivity(it);
+        Intent intent = new Intent(this, Mapa.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//        intent.putExtra("nome", loginText.getText().toString());
+//        intent.putExtra("senha", senhaText.getText().toString());
+        startActivity(intent);
     }
 
     public void cadastro (View v) {

@@ -18,4 +18,16 @@ public class UsuarioPerfil extends AppCompatActivity {
         Intent intent = new Intent(this, AlteraSenhaUsuario.class);
         startActivity(intent);
     }
+
+    public void roteiro (View v) {
+        Intent intent = new Intent(this, Roteiro.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
+    public void areaVisitada (View v) {
+        Intent intent = new Intent(this, AreaVisitada.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
 }

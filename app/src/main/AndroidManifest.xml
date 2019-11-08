@@ -9,10 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Roteiro"></activity>
+        <activity android:name=".Mapa"></activity>
+        <activity android:name=".Roteiro" />
         <activity android:name=".AreaVisitada" />
         <activity android:name=".ListaEventos" />
-        <activity android:name=".LoginUsuario" />
+        <activity android:name=".LoginUsuario">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".AlteraSenhaUsuario" />
         <activity android:name=".CadastroUsuario" />
         <activity android:name=".UsuarioPerfil" />
@@ -20,13 +27,7 @@
             android:name=".DescricaoEvento"
             android:label="@string/title_activity_descricao_evento"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

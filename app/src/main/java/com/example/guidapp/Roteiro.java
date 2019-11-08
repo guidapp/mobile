@@ -16,11 +16,13 @@ public class Roteiro extends AppCompatActivity {
 
     public void perfil (View v) {
         Intent intent = new Intent(this, UsuarioPerfil.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 
     public void areaVisitada (View v) {
         Intent intent = new Intent(this, AreaVisitada.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 
