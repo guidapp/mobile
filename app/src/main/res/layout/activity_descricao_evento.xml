@@ -51,7 +51,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/csm_140219_baz_chope__1__e7001ad3c9" />
+                    app:srcCompat="@drawable/clone_chopp" />
 
                 <TextView
                     android:id="@+id/textView2"

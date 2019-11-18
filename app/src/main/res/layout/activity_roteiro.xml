@@ -22,153 +22,20 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/viewRoteiro"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView8"
-                    app:layout_constraintStart_toStartOf="@+id/imageView7"
-                    app:layout_constraintTop_toTopOf="@+id/imageView7"
-                    app:srcCompat="@drawable/linha_diagonal" />
-
-                <ImageView
-                    android:id="@+id/imageView16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView8"
-                    app:layout_constraintStart_toStartOf="@+id/imageView9"
-                    app:layout_constraintTop_toTopOf="@+id/imageView8"
-                    app:srcCompat="@drawable/linha_diagonal2" />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="136dp"
-                    android:layout_height="91dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="24dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic[1]" />
-
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="149dp"
-                    android:layout_height="101dp"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginRight="32dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView7"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
-
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="150dp"
-                    android:layout_height="99dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginTop="60dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView8"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
-
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Vista do Monte"
-                    app:layout_constraintStart_toEndOf="@+id/imageView7"
-                    app:layout_constraintTop_toTopOf="@+id/imageView7" />
-
-                <TextView
-                    android:id="@+id/textView19"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="09:00"
-                    app:layout_constraintStart_toEndOf="@+id/imageView7"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
-
-                <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="Safari da onça"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView8"
-                    app:layout_constraintTop_toTopOf="@+id/imageView8" />
-
-                <TextView
-                    android:id="@+id/textView21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="11:00"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView8"
-                    app:layout_constraintTop_toBottomOf="@+id/textView20" />
-
-                <TextView
-                    android:id="@+id/textView22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Por do sol nas colinas"
-                    app:layout_constraintStart_toEndOf="@+id/imageView9"
-                    app:layout_constraintTop_toTopOf="@+id/imageView9" />
-
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="17:30"
-                    app:layout_constraintStart_toEndOf="@+id/imageView9"
-                    app:layout_constraintTop_toBottomOf="@+id/textView22" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="match_parent" />
         </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/btAddEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        android:onClick="listaEventos"
         app:backgroundTint="@color/design_default_color_primary"
         app:layout_constraintBottom_toTopOf="@+id/btNavPerfil"
         app:layout_constraintEnd_toEndOf="parent"
