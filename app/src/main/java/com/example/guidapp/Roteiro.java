@@ -1,9 +1,11 @@
 package com.example.guidapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -57,6 +59,12 @@ public class Roteiro extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void mapa (View v) {
+        Intent intent = new Intent(this, Mapa.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
+
     public void listaEventos (View v) {
         Intent intent = new Intent(this, ListaEventos.class);
         startActivity(intent);
@@ -66,6 +74,31 @@ public class Roteiro extends AppCompatActivity {
         this.desenharLinhaAnterior();
         this.addEspacoParaProximaLinha();
         this.addImagem();
+    }
+
+    public void removerEvento (View v) {
+        ArrayList<ImageView> listaEventosAntiga = (ArrayList) listaEventos.clone();
+        listaEventosAntiga.remove(v);
+
+        this.listaEventos = new ArrayList<>();
+        this.listaTracos = new ArrayList<>();
+
+        viewRoteiro.removeAllViews();
+
+        for (ImageView imagem : listaEventosAntiga) {
+            addEvento(btAddEvento);
+        }
+    }
+
+    public void opcoesEvento(View v) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setItems(R.array.opcoes_evento_roteiro, new DialogEventoRoteiro(this, v, 1));
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
     }
 
     private void desenharLinhaAnterior() {
@@ -118,13 +151,13 @@ public class Roteiro extends AppCompatActivity {
         imagem.setImageResource(R.drawable.clone_chopp);
         constLayout.addView(imagem);
 
-        if(listaEventos.size() == 0) {
+        if (listaEventos.size() == 0) {
             constSet.connect(imagem.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, marginDefault);
         } else {
-            constSet.connect(imagem.getId(), ConstraintSet.TOP, listaEventos.get(listaEventos.size()-1).getId(), ConstraintSet.BOTTOM, marginDefault);
+            constSet.connect(imagem.getId(), ConstraintSet.TOP, listaEventos.get(listaEventos.size() - 1).getId(), ConstraintSet.BOTTOM, marginDefault);
         }
 
-        if(listaEventos.size()%2 == 0) {
+        if (listaEventos.size() % 2 == 0) {
             constSet.connect(imagem.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, marginDefault);
         } else {
             constSet.connect(imagem.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, marginDefault);
@@ -135,5 +168,13 @@ public class Roteiro extends AppCompatActivity {
         constSet.applyTo(constLayout);
 
         listaEventos.add(imagem);
+
+        imagem.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                opcoesEvento(v);
+            }
+        });
+
     }
 }

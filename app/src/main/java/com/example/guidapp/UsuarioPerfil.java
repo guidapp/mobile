@@ -30,4 +30,10 @@ public class UsuarioPerfil extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
+
+    public void mapa (View v) {
+        Intent intent = new Intent(this, Mapa.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        startActivity(intent);
+    }
 }
