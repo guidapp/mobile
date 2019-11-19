@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import java.util.Calendar;
+
 public class ItemRoteiro extends ConstraintLayout {
     private Evento evento;
     private ImageView imagem;
@@ -16,7 +18,7 @@ public class ItemRoteiro extends ConstraintLayout {
 
     public static final int marginTexto = 16;
     public static final int tamImagem = 350;
-    public static final int tamTexto = 100;
+    public static final int tamTexto = 80;
 
     public ItemRoteiro(Context context, Evento evento) {
         super(context);
@@ -57,20 +59,14 @@ public class ItemRoteiro extends ConstraintLayout {
         // HORA DO EVENTO
         TextView tvHoraEvento = new TextView(getContext());
         tvHoraEvento.setId(-10800000 - evento.getId());
-        tvHoraEvento.setText(evento.getEndereco());
+        tvHoraEvento.setText(evento.getDataHora().get(Calendar.HOUR_OF_DAY) + ":" + evento.getDataHora().get(Calendar.MINUTE));
         tvHoraEvento.setTextSize(20);
         tvHoraEvento.setTextColor(getResources().getColor(android.R.color.black));
-        tvHoraEvento.setBackgroundColor(getResources().getColor(android.R.color.holo_red_light));
-
-        LayoutParams clpHoraEvento = new ConstraintLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-        tvHoraEvento.setLayoutParams(clpHoraEvento);
-
         this.addView(tvHoraEvento);
 
 
         // CONSTRAINTS NOME DO EVENTO
-        constSet.connect(tvNomeEvento.getId(), ConstraintSet.TOP, imagem.getId(), ConstraintSet.TOP, 120);
+        constSet.connect(tvNomeEvento.getId(), ConstraintSet.TOP, imagem.getId(), ConstraintSet.TOP, 80);
         constSet.connect(tvNomeEvento.getId(), ConstraintSet.BOTTOM, tvEnderecoEvento.getId(), ConstraintSet.TOP, 0);
         if(eventoPar)
             constSet.connect(tvNomeEvento.getId(), ConstraintSet.RIGHT, imagem.getId(), ConstraintSet.LEFT, marginTexto);
@@ -81,7 +77,7 @@ public class ItemRoteiro extends ConstraintLayout {
 
         // CONSTRAINTS ENDERECO DO EVENTO
         constSet.connect(tvEnderecoEvento.getId(), ConstraintSet.TOP, tvNomeEvento.getId(), ConstraintSet.BOTTOM, 0);
-        constSet.connect(tvEnderecoEvento.getId(), ConstraintSet.BOTTOM, imagem.getId(), ConstraintSet.BOTTOM, 120);
+        constSet.connect(tvEnderecoEvento.getId(), ConstraintSet.BOTTOM, imagem.getId(), ConstraintSet.BOTTOM, 80);
         if(eventoPar)
             constSet.connect(tvEnderecoEvento.getId(), ConstraintSet.RIGHT, imagem.getId(), ConstraintSet.LEFT, marginTexto);
         else
@@ -94,7 +90,7 @@ public class ItemRoteiro extends ConstraintLayout {
         constSet.connect(tvHoraEvento.getId(), ConstraintSet.RIGHT, imagem.getId(), ConstraintSet.RIGHT, marginTexto);
         constSet.connect(tvHoraEvento.getId(), ConstraintSet.LEFT, imagem.getId(), ConstraintSet.LEFT, marginTexto);
         constSet.constrainHeight(tvHoraEvento.getId(), tamTexto);
-//        constSet.constrainPercentWidth(tvHoraEvento.getId(), 50);
+        constSet.constrainWidth(tvHoraEvento.getId(), 150);
 
 
         // CONSTRAINT VERTICAL DA IMAGEM

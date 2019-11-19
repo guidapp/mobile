@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Roteiro extends AppCompatActivity {
 
@@ -39,7 +40,8 @@ public class Roteiro extends AppCompatActivity {
         btAddEvento.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                addEvento(v);
+//                addEvento(v);
+                listaEventos(v);
             }
         });
     }
@@ -143,7 +145,7 @@ public class Roteiro extends AppCompatActivity {
         ConstraintSet constSet = new ConstraintSet();
         constSet.clone(constLayout);
 
-        ItemRoteiro item = new ItemRoteiro(this, new Evento(listaItens.size(), "nome", "local"));
+        ItemRoteiro item = new ItemRoteiro(this, new Evento(listaItens.size(), "nome", 3, "local", Calendar.getInstance()));
         item.setId(-1000000 - listaItens.size());
         constLayout.addView(item);
 

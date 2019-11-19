@@ -2,6 +2,7 @@ package com.example.guidapp;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Calendar;
 
 public class Evento {
     private int id;
@@ -12,11 +13,11 @@ public class Evento {
     private float latitude;
     private float longitude;
     private String endereco;
-    private LocalDate data;
-    private LocalTime hora;
+    private Calendar dataHora;
     private String nomeImagem;
 
-    public Evento(int id, String nome, String descricao, float avaliacao, int visitas, float latitude, float longitude, String endereco, LocalDate data, LocalTime hora) {
+    public Evento(int id, String nome, String descricao, float avaliacao, int visitas, float latitude, float longitude, String endereco, Calendar dataHora) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.avaliacao = avaliacao;
@@ -24,14 +25,15 @@ public class Evento {
         this.latitude = latitude;
         this.longitude = longitude;
         this.endereco = endereco;
-        this.data = data;
-        this.hora = hora;
+        this.dataHora = dataHora;
     }
 
-    public Evento(int id, String nome, String endereco) {
+    public Evento(int id, String nome, int avaliacao, String endereco, Calendar dataHora) {
         this.id = id;
         this.nome = nome;
+        this.avaliacao = avaliacao;
         this.endereco = endereco;
+        this.dataHora = dataHora;
     }
 
     public int getId() {
@@ -98,19 +100,19 @@ public class Evento {
         this.endereco = endereco;
     }
 
-    public LocalDate getData() {
-        return data;
+    public Calendar getDataHora() {
+        return dataHora;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setDataHora(Calendar dataHora) {
+        this.dataHora = dataHora;
     }
 
-    public LocalTime getHora() {
-        return hora;
+    public String getNomeImagem() {
+        return nomeImagem;
     }
 
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
+    public void setNomeImagem(String nomeImagem) {
+        this.nomeImagem = nomeImagem;
     }
 }
