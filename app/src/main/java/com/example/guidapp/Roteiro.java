@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,13 +18,11 @@ public class Roteiro extends AppCompatActivity {
 
     private ConstraintLayout viewRoteiro;
     private FloatingActionButton btAddEvento;
-    private ArrayList<ImageView> listaEventos;
+    private ArrayList<ImageView> listaImagens;
     private ArrayList<ImageView> listaTracos;
+    private ArrayList<ItemRoteiro> listaItens;
 
     private int marginDefault = 40;
-    private int tamImagem = 400;
-
-    private Paint paint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +32,9 @@ public class Roteiro extends AppCompatActivity {
         this.viewRoteiro = (ConstraintLayout) findViewById(R.id.viewRoteiro);
         this.btAddEvento = (FloatingActionButton) findViewById(R.id.btAddEvento);
 
-        this.listaEventos = new ArrayList<>();
+        this.listaImagens = new ArrayList<>();
         this.listaTracos = new ArrayList<>();
+        this.listaItens = new ArrayList<>();
 
         btAddEvento.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -73,19 +70,19 @@ public class Roteiro extends AppCompatActivity {
     public void addEvento (View v) {
         this.desenharLinhaAnterior();
         this.addEspacoParaProximaLinha();
-        this.addImagem();
+        this.addItemRoteiro();
     }
 
     public void removerEvento (View v) {
-        ArrayList<ImageView> listaEventosAntiga = (ArrayList) listaEventos.clone();
-        listaEventosAntiga.remove(v);
+        ArrayList<ItemRoteiro> listaItensAntiga = (ArrayList) listaItens.clone();
+        listaItensAntiga.remove(v);
 
-        this.listaEventos = new ArrayList<>();
+        this.listaItens = new ArrayList<>();
         this.listaTracos = new ArrayList<>();
 
         viewRoteiro.removeAllViews();
 
-        for (ImageView imagem : listaEventosAntiga) {
+        for (ItemRoteiro item : listaItensAntiga) {
             addEvento(btAddEvento);
         }
     }
@@ -127,54 +124,46 @@ public class Roteiro extends AppCompatActivity {
         constLayout.addView(linha);
 
         if(listaTracos.size() == 0) {
-            constSet.connect(linha.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, marginDefault+tamImagem/2);
+            constSet.connect(linha.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 2*marginDefault+ItemRoteiro.calcularAltura()/2);
         } else {
-            constSet.connect(linha.getId(), ConstraintSet.TOP, listaTracos.get(listaEventos.size()-1).getId(), ConstraintSet.BOTTOM, 0);
+            constSet.connect(linha.getId(), ConstraintSet.TOP, listaTracos.get(listaItens.size()-1).getId(), ConstraintSet.BOTTOM, 0);
         }
 
-        constSet.connect(linha.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, marginDefault+tamImagem/2);
-        constSet.connect(linha.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, marginDefault+tamImagem/2);
+        constSet.connect(linha.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
+        constSet.connect(linha.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
 
-        constSet.constrainHeight(linha.getId(), tamImagem+marginDefault);
+        constSet.constrainHeight(linha.getId(), ItemRoteiro.calcularAltura()+marginDefault);
         constSet.applyTo(constLayout);
 
         listaTracos.add(linha);
     }
 
-    private void addImagem() {
+    private void addItemRoteiro() {
         ConstraintLayout constLayout = (ConstraintLayout) viewRoteiro;
         ConstraintSet constSet = new ConstraintSet();
         constSet.clone(constLayout);
 
-        ImageView imagem = new ImageView(this);
-        imagem.setId(-1000000 - listaEventos.size());
-        imagem.setImageResource(R.drawable.clone_chopp);
-        constLayout.addView(imagem);
+        ItemRoteiro item = new ItemRoteiro(this, new Evento(listaItens.size(), "nome", "local"));
+        item.setId(-1000000 - listaItens.size());
+        constLayout.addView(item);
 
-        if (listaEventos.size() == 0) {
-            constSet.connect(imagem.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, marginDefault);
+        if (listaItens.size() == 0) {
+            constSet.connect(item.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, marginDefault);
         } else {
-            constSet.connect(imagem.getId(), ConstraintSet.TOP, listaEventos.get(listaEventos.size() - 1).getId(), ConstraintSet.BOTTOM, marginDefault);
+            constSet.connect(item.getId(), ConstraintSet.TOP, listaItens.get(listaItens.size() - 1).getId(), ConstraintSet.BOTTOM, marginDefault);
         }
 
-        if (listaEventos.size() % 2 == 0) {
-            constSet.connect(imagem.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, marginDefault);
+        if (listaItens.size() % 2 == 0) {
+            constSet.connect(item.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, marginDefault);
         } else {
-            constSet.connect(imagem.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, marginDefault);
+            constSet.connect(item.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, marginDefault);
         }
 
-        constSet.constrainHeight(imagem.getId(), tamImagem);
-        constSet.constrainWidth(imagem.getId(), tamImagem);
+        constSet.constrainHeight(item.getId(), ItemRoteiro.calcularAltura());
         constSet.applyTo(constLayout);
 
-        listaEventos.add(imagem);
+        item.desenhar(listaItens.size()%2 == 1);
 
-        imagem.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                opcoesEvento(v);
-            }
-        });
-
+        listaItens.add(item);
     }
 }
