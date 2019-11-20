@@ -10,13 +10,13 @@ public class Evento implements Comparable<Evento> {
     private String descricao;
     private float avaliacao;
     private int visitas;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
     private String endereco;
     private Calendar dataHora;
     private String nomeImagem;
 
-    public Evento(int id, String nome, String descricao, float avaliacao, int visitas, float latitude, float longitude, String endereco, Calendar dataHora) {
+    public Evento(int id, String nome, String descricao, float avaliacao, int visitas, double latitude, double longitude, String endereco, Calendar dataHora) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -28,10 +28,12 @@ public class Evento implements Comparable<Evento> {
         this.dataHora = dataHora;
     }
 
-    public Evento(int id, String nome, int avaliacao, String endereco, Calendar dataHora) {
+    public Evento(int id, String nome, int avaliacao, double latitude, double longitude, String endereco, Calendar dataHora) {
         this.id = id;
         this.nome = nome;
         this.avaliacao = avaliacao;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.endereco = endereco;
         this.dataHora = dataHora;
     }
@@ -84,7 +86,7 @@ public class Evento implements Comparable<Evento> {
         this.visitas = visitas;
     }
 
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
@@ -92,7 +94,7 @@ public class Evento implements Comparable<Evento> {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
