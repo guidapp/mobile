@@ -4,6 +4,7 @@ import com.example.guidapp.Evento;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 public class EventoController {
@@ -53,10 +54,12 @@ public class EventoController {
 
     public void addEventoAoRoteiro(int idEvento) {
         eventosRoteiro.add(getEventoById(idEvento));
+        Collections.sort(eventosRoteiro);
     }
 
     public void removerEventoRoteiro(int idEvento) {
         eventosRoteiro.remove(getEventoById(idEvento));
+        Collections.sort(eventosRoteiro);
     }
 
     public boolean eventoNoRoteiro(int idEvento) {

@@ -42,6 +42,10 @@ public class ListaEventos extends AppCompatActivity {
 
     private void construirLista() {
         for (Evento evento : EventoController.getInstance().listaEventos){
+            if(EventoController.getInstance().eventoNoRoteiro(evento.getId())) {
+                continue;
+            }
+
             ConstraintSet constSet = new ConstraintSet();
             constSet.clone(listaEventoView);
 

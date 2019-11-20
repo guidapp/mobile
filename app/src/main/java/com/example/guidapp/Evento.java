@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Calendar;
 
-public class Evento {
+public class Evento implements Comparable<Evento> {
     private int id;
     private String nome;
     private String descricao;
@@ -122,5 +122,10 @@ public class Evento {
 
     public void setNomeImagem(String nomeImagem) {
         this.nomeImagem = nomeImagem;
+    }
+
+    @Override
+    public int compareTo(Evento evento) {
+        return dataHora.compareTo(evento.getDataHora());
     }
 }
