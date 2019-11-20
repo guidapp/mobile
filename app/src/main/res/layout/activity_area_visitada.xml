@@ -152,7 +152,7 @@
                         app:srcCompat="@drawable/clone_chopp" />
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/tvDataHora"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -173,7 +173,7 @@
                         android:text="Rua Fernando de Noronha"
                         android:textColor="@android:color/black"
                         app:layout_constraintStart_toEndOf="@+id/imageView5"
-                        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvDataHora" />
 
                     <TextView
                         android:id="@+id/textView14"

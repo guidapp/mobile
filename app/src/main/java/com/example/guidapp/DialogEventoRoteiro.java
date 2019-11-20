@@ -11,21 +11,20 @@ public class DialogEventoRoteiro implements DialogInterface.OnClickListener {
 
     private Roteiro parentActivity;
     private int idEvento;
-    private View viewOrigem;
 
-    DialogEventoRoteiro(Roteiro activity, View viewOrigem, int idEvento) {
+    DialogEventoRoteiro(Roteiro activity, int idEvento) {
         this.parentActivity = activity;
         this.idEvento = idEvento;
-        this.viewOrigem = viewOrigem;
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if(which == 0) { // ver evento
             Intent intent = new Intent(parentActivity, DescricaoEvento.class);
+            intent.putExtra("idEvento", idEvento);
             parentActivity.startActivity(intent);
         } else if(which == 1) { // remover do roteiro
-            parentActivity.removerEvento(viewOrigem);
+            parentActivity.removerEvento(idEvento);
         } else { // voltar
             dialog.dismiss();
         }

@@ -29,11 +29,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="user@gmail.com"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/tvDataHora"
         app:layout_constraintTop_toBottomOf="@+id/etNomePerfil" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvDataHora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
@@ -52,7 +52,7 @@
         android:layout_marginTop="24dp"
         android:text="Senha"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDataHora" />
 
     <TextView
         android:id="@+id/textView"
@@ -63,7 +63,7 @@
         android:layout_marginTop="228dp"
         android:layout_marginBottom="30dp"
         android:text="Nome"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/tvDataHora"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

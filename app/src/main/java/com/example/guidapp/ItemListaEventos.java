@@ -31,6 +31,7 @@ public class ItemListaEventos extends ConstraintLayout {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), DescricaoEvento.class);
                 intent.putExtra("idEvento", getEvento().getId());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(intent);
             }
         });
@@ -84,11 +85,7 @@ public class ItemListaEventos extends ConstraintLayout {
         // HORA DO EVENTO
         TextView tvHoraEvento = new TextView(getContext());
         tvHoraEvento.setId(-10800000 - evento.getId());
-        tvHoraEvento.setText(evento.getDataHora().get(Calendar.DATE) + "/" +
-                evento.getDataHora().get(Calendar.MONTH) + "/" +
-                evento.getDataHora().get(Calendar.YEAR) + " " +
-                evento.getDataHora().get(Calendar.HOUR_OF_DAY) + ":" +
-                evento.getDataHora().get(Calendar.MINUTE));
+        tvHoraEvento.setText(evento.getDataHoraFormatada());
         tvHoraEvento.setTextSize(20);
         tvHoraEvento.setTextColor(getResources().getColor(android.R.color.black));
         this.addView(tvHoraEvento);

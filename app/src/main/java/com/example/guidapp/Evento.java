@@ -36,6 +36,14 @@ public class Evento {
         this.dataHora = dataHora;
     }
 
+    public String getDataHoraFormatada() {
+        return getDataHora().get(Calendar.DATE) + "/" +
+                getDataHora().get(Calendar.MONTH) + "/" +
+                getDataHora().get(Calendar.YEAR) + " " +
+                getDataHora().get(Calendar.HOUR_OF_DAY) + ":" +
+                getDataHora().get(Calendar.MINUTE);
+    }
+
     public int getId() {
         return id;
     }

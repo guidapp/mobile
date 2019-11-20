@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.guidapp.controllers.EventoController;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -17,11 +18,14 @@ import java.util.Calendar;
 
 public class Roteiro extends AppCompatActivity {
 
+    public static final int SEM_ACAO = 0;
+    public static final int ADD_EVENTO_AO_ROTEIRO = 1;
+
     private ConstraintLayout viewRoteiro;
     private FloatingActionButton btAddEvento;
-    private ArrayList<ImageView> listaImagens;
     private ArrayList<ImageView> listaTracos;
     private ArrayList<ItemRoteiro> listaItens;
+    private EventoController eventoController;
 
     private int marginDefault = 40;
 
@@ -33,17 +37,21 @@ public class Roteiro extends AppCompatActivity {
         this.viewRoteiro = (ConstraintLayout) findViewById(R.id.viewRoteiro);
         this.btAddEvento = (FloatingActionButton) findViewById(R.id.btAddEvento);
 
-        this.listaImagens = new ArrayList<>();
         this.listaTracos = new ArrayList<>();
         this.listaItens = new ArrayList<>();
+
+        this.eventoController = EventoController.getInstance();
 
         btAddEvento.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                addEvento(v);
                 listaEventos(v);
             }
         });
+
+        for (Evento evento : eventoController.eventosRoteiro) {
+            addEvento(evento);
+        }
     }
 
     public void perfil (View v) {
@@ -69,23 +77,22 @@ public class Roteiro extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void addEvento (View v) {
+    public void addEvento (Evento evento) {
         this.desenharLinhaAnterior();
         this.addEspacoParaProximaLinha();
-        this.addItemRoteiro();
+        this.addItemRoteiro(evento);
     }
 
-    public void removerEvento (View v) {
-        ArrayList<ItemRoteiro> listaItensAntiga = (ArrayList) listaItens.clone();
-        listaItensAntiga.remove(v);
+    public void removerEvento (int idEvento) {
+        eventoController.removerEventoRoteiro(idEvento);
 
         this.listaItens = new ArrayList<>();
         this.listaTracos = new ArrayList<>();
 
         viewRoteiro.removeAllViews();
 
-        for (ItemRoteiro item : listaItensAntiga) {
-            addEvento(btAddEvento);
+        for (Evento evento : eventoController.eventosRoteiro) {
+            addEvento(evento);
         }
     }
 
@@ -93,7 +100,7 @@ public class Roteiro extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setItems(R.array.opcoes_evento_roteiro, new DialogEventoRoteiro(this, v, 1));
+        builder.setItems(R.array.opcoes_evento_roteiro, new DialogEventoRoteiro(this, ((ItemRoteiro) v).getEvento().getId()));
 
         AlertDialog dialog = builder.create();
 
@@ -140,12 +147,12 @@ public class Roteiro extends AppCompatActivity {
         listaTracos.add(linha);
     }
 
-    private void addItemRoteiro() {
+    private void addItemRoteiro(Evento evento) {
         ConstraintLayout constLayout = (ConstraintLayout) viewRoteiro;
         ConstraintSet constSet = new ConstraintSet();
         constSet.clone(constLayout);
 
-        ItemRoteiro item = new ItemRoteiro(this, new Evento(listaItens.size(), "nome", 3, "local", Calendar.getInstance()));
+        ItemRoteiro item = new ItemRoteiro(this, evento);
         item.setId(-1000000 - listaItens.size());
         constLayout.addView(item);
 

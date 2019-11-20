@@ -8,11 +8,13 @@ import java.util.GregorianCalendar;
 
 public class EventoController {
     public ArrayList<Evento> listaEventos;
+    public ArrayList<Evento> eventosRoteiro;
 
     private static EventoController instance = null;
 
     private EventoController() {
         listaEventos = new ArrayList<>();
+        eventosRoteiro = new ArrayList<>();
 
         int ano = 2019;
         int mes = 11;
@@ -47,5 +49,19 @@ public class EventoController {
         }
 
         return null;
+    }
+
+    public void addEventoAoRoteiro(int idEvento) {
+        eventosRoteiro.add(getEventoById(idEvento));
+    }
+
+    public void removerEventoRoteiro(int idEvento) {
+        eventosRoteiro.remove(getEventoById(idEvento));
+    }
+
+    public boolean eventoNoRoteiro(int idEvento) {
+        Evento evento = getEventoById(idEvento);
+
+        return eventosRoteiro.contains(evento);
     }
 }
