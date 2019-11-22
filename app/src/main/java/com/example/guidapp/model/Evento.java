@@ -1,6 +1,7 @@
 package com.example.guidapp.model;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Evento implements Comparable<Evento> {
     private int id;
@@ -34,6 +35,16 @@ public class Evento implements Comparable<Evento> {
         this.longitude = longitude;
         this.endereco = endereco;
         this.dataHora = dataHora;
+    }
+
+    public Evento(int id, String nome) {
+        this.id = id;
+        this.nome = nome;
+        this.avaliacao = 3;
+        this.latitude = 2.222;
+        this.longitude = 4.444;
+        this.endereco = "Rua 7";
+        this.dataHora = Calendar.getInstance();
     }
 
     public String getDataHoraFormatada() {

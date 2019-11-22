@@ -43,7 +43,7 @@ public class ListaEventos extends AppCompatActivity {
     private void construirLista() {
         EventoController eventoController = EventoController.getInstance();
 
-        for (Evento evento : eventoController.listaEventos){
+        for (Evento evento : eventoController.getEventosFromDatabase(getBaseContext())){
             if(eventoController.eventoNoRoteiro(evento.getId()) || eventoController.eventoVisitado(evento.getId())) {
                 continue;
             }

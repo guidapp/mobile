@@ -1,5 +1,8 @@
 package com.example.guidapp.controllers;
 
+import android.content.Context;
+import android.database.Cursor;
+
 import com.example.guidapp.model.Evento;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -135,6 +138,20 @@ public class EventoController {
         }
 
         return false;
+    }
+
+    public ArrayList<Evento> getEventosFromDatabase(Context context) {
+        BancoController crud = new BancoController(context);
+        Cursor cursor = crud.carregaDados();
+
+        ArrayList<Evento> listaEventos = new ArrayList<>();
+
+        while(cursor.moveToNext()) {
+            Evento evento = new Evento(cursor.getInt(0), cursor.getString(1));
+            listaEventos.add(evento);
+        }
+
+        return listaEventos;
     }
 
     private boolean coordenadasProximas (LatLng coord1, LatLng coord2) {
