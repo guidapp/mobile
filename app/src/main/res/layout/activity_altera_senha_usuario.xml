@@ -16,71 +16,94 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/editText2"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-    <TextView
-        android:id="@+id/tvAvaliacao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="Nova Senha"
-        app:layout_constraintEnd_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/tvDescricao" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text="12345678"
-        app:layout_constraintStart_toEndOf="@+id/tvAvaliacao"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="35dp"
-        android:text="Confirmar Senha"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAvaliacao" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="70dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text="12345678"
-        app:layout_constraintStart_toEndOf="@+id/tvDescricao"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/etConfirmarSenha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="@+id/etSenhaAtual"
+            app:layout_constraintTop_toBottomOf="@+id/etNovaSenha" />
 
-    <TextView
-        android:id="@+id/tvDescricao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Senha atual"
-        app:layout_constraintEnd_toEndOf="@+id/tvAvaliacao"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tvAvaliacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Nova Senha"
+            app:layout_constraintBottom_toBottomOf="@+id/etNovaSenha"
+            app:layout_constraintEnd_toStartOf="@+id/etNovaSenha"
+            app:layout_constraintTop_toTopOf="@+id/etNovaSenha" />
+
+        <EditText
+            android:id="@+id/etNovaSenha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="@+id/etSenhaAtual"
+            app:layout_constraintTop_toBottomOf="@+id/etSenhaAtual" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Confirmar Senha"
+            app:layout_constraintBottom_toBottomOf="@+id/etConfirmarSenha"
+            app:layout_constraintEnd_toStartOf="@+id/etConfirmarSenha"
+            app:layout_constraintTop_toTopOf="@+id/etConfirmarSenha" />
+
+        <EditText
+            android:id="@+id/etSenhaAtual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/tvDescricao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Senha atual"
+            app:layout_constraintBottom_toBottomOf="@+id/etSenhaAtual"
+            app:layout_constraintEnd_toStartOf="@+id/etSenhaAtual"
+            app:layout_constraintTop_toTopOf="@+id/etSenhaAtual" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Atualizar Senha" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

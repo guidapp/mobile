@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.guidapp.controllers.EventoController;
+import com.example.guidapp.controllers.UsuarioController;
 
 public class LoginUsuario extends AppCompatActivity {
 
@@ -24,6 +25,9 @@ public class LoginUsuario extends AppCompatActivity {
 
         EventoController.getInstance().repopularBanco(this);
         EventoController.getInstance().carregarDadosDoBanco(this);
+
+        UsuarioController.getInstance().repopularBanco(this);
+        UsuarioController.getInstance().carregarUsuarioDoBanco(this);
     }
 
     public void login(View v) {

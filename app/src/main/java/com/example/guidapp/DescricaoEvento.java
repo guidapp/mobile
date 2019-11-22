@@ -31,7 +31,7 @@ public class DescricaoEvento extends AppCompatActivity {
         tvNome = findViewById(R.id.tvNome);
         tvAvaliacao = findViewById(R.id.tvAvaliacao);
         tvLocal = findViewById(R.id.tvLocal);
-        tvDataHora = findViewById(R.id.tvDataHora);
+        tvDataHora = findViewById(R.id.tvEmail);
         tvDescricao = findViewById(R.id.tvDescricao);
         btActionRoteiro = findViewById(R.id.btActionRoteiro);
 
