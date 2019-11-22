@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.guidapp.controllers.EventoController;
 
 public class LoginUsuario extends AppCompatActivity {
 
@@ -18,6 +21,9 @@ public class LoginUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_login_usuario);
         this.loginText = (EditText)findViewById(R.id.etEmailLogin);
         this.senhaText = (EditText)findViewById(R.id.etSenhaLogin);
+
+        EventoController.getInstance().repopularBanco(this);
+        EventoController.getInstance().carregarDadosDoBanco(this);
     }
 
     public void login(View v) {

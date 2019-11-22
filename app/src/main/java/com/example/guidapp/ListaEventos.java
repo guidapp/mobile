@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.guidapp.controllers.EventoController;
 import com.example.guidapp.model.Evento;
@@ -43,7 +44,7 @@ public class ListaEventos extends AppCompatActivity {
     private void construirLista() {
         EventoController eventoController = EventoController.getInstance();
 
-        for (Evento evento : eventoController.getEventosFromDatabase(getBaseContext())){
+        for (Evento evento : eventoController.listaEventos){
             if(eventoController.eventoNoRoteiro(evento.getId()) || eventoController.eventoVisitado(evento.getId())) {
                 continue;
             }
