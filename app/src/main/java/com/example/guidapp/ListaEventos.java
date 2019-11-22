@@ -9,9 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.guidapp.controllers.EventoController;
+import com.example.guidapp.model.Evento;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class ListaEventos extends AppCompatActivity {
     ConstraintLayout listaEventoView;
@@ -41,8 +41,10 @@ public class ListaEventos extends AppCompatActivity {
     }
 
     private void construirLista() {
-        for (Evento evento : EventoController.getInstance().listaEventos){
-            if(EventoController.getInstance().eventoNoRoteiro(evento.getId())) {
+        EventoController eventoController = EventoController.getInstance();
+
+        for (Evento evento : eventoController.listaEventos){
+            if(eventoController.eventoNoRoteiro(evento.getId()) || eventoController.eventoVisitado(evento.getId())) {
                 continue;
             }
 

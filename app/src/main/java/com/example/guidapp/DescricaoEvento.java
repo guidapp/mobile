@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.guidapp.controllers.EventoController;
+import com.example.guidapp.model.Evento;
 
 public class DescricaoEvento extends AppCompatActivity {
 

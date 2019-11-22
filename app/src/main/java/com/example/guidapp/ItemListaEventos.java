@@ -9,9 +9,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-import com.example.guidapp.controllers.EventoController;
-
-import java.util.Calendar;
+import com.example.guidapp.model.Evento;
 
 public class ItemListaEventos extends ConstraintLayout {
     private Evento evento;

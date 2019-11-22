@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import com.example.guidapp.model.Evento;
+
 import java.util.Calendar;
 
 public class ItemRoteiro extends ConstraintLayout {

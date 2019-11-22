@@ -1,7 +1,5 @@
-package com.example.guidapp;
+package com.example.guidapp.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Calendar;
 
 public class Evento implements Comparable<Evento> {
@@ -44,6 +42,10 @@ public class Evento implements Comparable<Evento> {
                 getDataHora().get(Calendar.YEAR) + " " +
                 getDataHora().get(Calendar.HOUR_OF_DAY) + ":" +
                 getDataHora().get(Calendar.MINUTE);
+    }
+
+    public boolean mesmoLocal(Evento evento) {
+        return this.longitude == evento.getLongitude() && this.latitude == evento.getLatitude();
     }
 
     public int getId() {

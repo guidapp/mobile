@@ -1,22 +1,23 @@
 package com.example.guidapp.controllers;
 
-import com.example.guidapp.Evento;
+import com.example.guidapp.model.Evento;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 
 public class EventoController {
     public ArrayList<Evento> listaEventos;
     public ArrayList<Evento> eventosRoteiro;
+    public ArrayList<Integer> eventosVisitados;
 
     private static EventoController instance = null;
 
     private EventoController() {
         listaEventos = new ArrayList<>();
         eventosRoteiro = new ArrayList<>();
+        eventosVisitados = new ArrayList<>();
 
         int ano = 2019;
         int mes = 11;
@@ -35,6 +36,9 @@ public class EventoController {
         listaEventos.add(new Evento(11, "Carreiras Policias MDM",           1,  -8.8880472, -36.4914402, "Rua b", new GregorianCalendar(ano, mes, dia, 18, 10, 00)));
         listaEventos.add(new Evento(12, "3a Corrida Vamos Abraçar o Sol",   2,  -8.8814444, -36.4935899, "Rua c", new GregorianCalendar(ano, mes, dia, 17, 20, 00)));
         listaEventos.add(new Evento(13, "34ª Corrida da Consciência Negra", 4,  -8.8900444, -36.4759209, "Rua d", new GregorianCalendar(ano, mes, dia, 8,  30, 00)));
+
+        eventosVisitados.add(1);
+        eventosVisitados.add(11);
     }
 
     public static EventoController getInstance() {
@@ -67,5 +71,73 @@ public class EventoController {
         Evento evento = getEventoById(idEvento);
 
         return eventosRoteiro.contains(evento);
+    }
+
+    public boolean eventoVisitado(int idEvento) {
+        return eventosVisitados.contains(idEvento);
+    }
+
+    public int porcentagemLocaisVisitados() {
+        ArrayList<LatLng> locais = new ArrayList<>();
+        ArrayList<LatLng> locaisVisitados = new ArrayList<>();
+
+        // ALGORITMO PARA LISTAR LOCAIS DE EVENTOS (SEM REPETICAO)
+        for(Evento evento : listaEventos) {
+            LatLng coordEvento = new LatLng(evento.getLatitude(), evento.getLongitude());
+
+            boolean localAdicionado = false;
+            for (LatLng local : locais) {
+                if(coordenadasProximas(local, coordEvento)){
+                    localAdicionado = true;
+                    break;
+                }
+            }
+
+            if(! localAdicionado) {
+                locais.add(coordEvento);
+            }
+        }
+
+        // ALGORITMO PARA LISTAR LOCAIS VISITADOS
+        for(int idEvento : eventosVisitados) {
+            Evento eventoVisitado = getEventoById(idEvento);
+            LatLng coordEvento = new LatLng(eventoVisitado.getLatitude(), eventoVisitado.getLongitude());
+
+            boolean localVisitado = false;
+            for (LatLng local : locaisVisitados) {
+                if(coordenadasProximas(local, coordEvento)){
+                    localVisitado = true;
+                    break;
+                }
+            }
+
+            if(! localVisitado) {
+                locaisVisitados.add(coordEvento);
+            }
+        }
+
+        int total = locais.size();
+        int visitados = locaisVisitados.size();
+
+        return 100 * visitados / total;
+    }
+
+    public boolean localVisitado(double latitude, double longitude) {
+        LatLng coord = new LatLng(latitude, longitude);
+
+        for (int idEventoVisitado : eventosVisitados) {
+            Evento eventoVisitado = getEventoById(idEventoVisitado);
+            LatLng coordEvento = new LatLng(eventoVisitado.getLatitude(), eventoVisitado.getLongitude());
+
+            if(coordenadasProximas(coordEvento, coord)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean coordenadasProximas (LatLng coord1, LatLng coord2) {
+        return coord1.latitude == coord2.latitude && coord1.longitude == coord2.longitude;
     }
 }

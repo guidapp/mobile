@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.guidapp.controllers.EventoController;
+import com.example.guidapp.model.Evento;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class Roteiro extends AppCompatActivity {
 
