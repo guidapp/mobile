@@ -13,6 +13,8 @@ import com.example.guidapp.controllers.EventoController;
 import com.example.guidapp.model.Evento;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class ListaEventos extends AppCompatActivity {
     ConstraintLayout listaEventoView;
@@ -45,7 +47,7 @@ public class ListaEventos extends AppCompatActivity {
         EventoController eventoController = EventoController.getInstance();
 
         for (Evento evento : eventoController.listaEventos){
-            if(eventoController.eventoNoRoteiro(evento.getId()) || eventoController.eventoVisitado(evento.getId())) {
+            if(eventoController.eventoNoRoteiro(evento.getId()) || eventoController.eventoVisitado(evento.getId()) || eventoController.eventoPassado(evento)) {
                 continue;
             }
 

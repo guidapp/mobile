@@ -9,6 +9,7 @@ import com.example.guidapp.model.Evento;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 
@@ -44,8 +45,8 @@ public class EventoController {
         eventoDatabase.zerarTabela();
 
         int ano = 2019;
-        int mes = 11;
-        int dia = 19;
+        int mes = 10;
+        int dia = 22;
 
         eventos.add(new Evento(1, "Clone de chopp",                    1,  -8.8928373, -36.4953706, "Rua 3", new GregorianCalendar(ano, mes, dia, 13, 30, 00)));
         eventos.add(new Evento(2, "MARATONA DE CRUZES",                2,  -8.8843082, -36.4756346, "Rua 5", new GregorianCalendar(ano, mes, dia, 12, 20, 00)));
@@ -156,6 +157,10 @@ public class EventoController {
         }
 
         return false;
+    }
+
+    public boolean eventoPassado(Evento evento) {
+        return evento.getDataHora().before(Calendar.getInstance());
     }
 
     private boolean coordenadasProximas (LatLng coord1, LatLng coord2) {

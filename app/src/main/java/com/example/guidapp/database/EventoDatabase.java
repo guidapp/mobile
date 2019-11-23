@@ -66,7 +66,7 @@ public class EventoDatabase extends SQLiteOpenHelper {
         if(cursor!=null){
             while(cursor.moveToNext()) {
                 Calendar dataHora = Calendar.getInstance();
-                dataHora.setTimeInMillis(cursor.getInt(6));
+                dataHora.setTimeInMillis(cursor.getLong(6));
 
                 Evento evento = new Evento(
                         cursor.getInt(0), // ID

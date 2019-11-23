@@ -66,7 +66,7 @@ public class AreaVisitada extends AppCompatActivity {
 
     private void construirLista() {
         for (Evento evento : eventoController.listaEventos){
-            if(eventoController.eventoNoRoteiro(evento.getId()) || eventoController.localVisitado(evento.getLatitude(), evento.getLongitude())) {
+            if(eventoController.eventoNoRoteiro(evento.getId()) || eventoController.localVisitado(evento.getLatitude(), evento.getLongitude()) || eventoController.eventoPassado(evento)) {
                 continue;
             }
 

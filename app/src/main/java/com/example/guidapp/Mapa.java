@@ -56,7 +56,8 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback {
 
         EventoController eventoController = EventoController.getInstance();
         for (Evento evento : eventoController.listaEventos) {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(evento.getLatitude(),evento.getLongitude())).title(evento.getNome()));
+            if(! eventoController.eventoPassado(evento))
+                mMap.addMarker(new MarkerOptions().position(new LatLng(evento.getLatitude(),evento.getLongitude())).title(evento.getNome()));
         }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(garanhuns, 14));
