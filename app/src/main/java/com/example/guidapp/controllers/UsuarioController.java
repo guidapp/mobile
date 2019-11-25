@@ -35,6 +35,14 @@ public class UsuarioController {
             usuarioLogado = usuarios.get(0);
     }
 
+    public void login(Context context, Usuario usuario) {
+        UsuarioDatabase usuarioDatabase = new UsuarioDatabase(context);
+        usuarioDatabase.zerarTabela();
+
+        usuarioDatabase.inserir(usuario);
+        carregarUsuarioDoBanco(context);
+    }
+
     public void repopularBanco(Context context) {
         UsuarioDatabase usuarioDatabase = new UsuarioDatabase(context);
         usuarioDatabase.zerarTabela();

@@ -1,5 +1,11 @@
 package com.example.guidapp.model;
 
+import android.util.JsonReader;
+import android.util.Log;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class Usuario {
     private int id;
     private String nome;
@@ -20,27 +26,45 @@ public class Usuario {
     }
 
     public Usuario(int id, String nome, String sobrenome, String email, boolean administrador, String cpf) {
-        this.id = id;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.administrador = administrador;
-        this.cpf = cpf;
+        this(id, nome, sobrenome, email, null, administrador, cpf);
     }
 
     public Usuario(String nome, String sobrenome, String email, String senha, boolean administrador, String cpf) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
-        this.senha = senha;
-        this.administrador = administrador;
-        this.cpf = cpf;
+        this(0, nome, sobrenome, email, senha, administrador, cpf);
     }
 
     public Usuario(String nome, String sobrenome, String email) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.email = email;
+        this(0, nome, sobrenome, email, null, false, null);
+    }
+
+    public Usuario(JsonReader jsonReader) throws IOException {
+        jsonReader.beginObject();
+
+        while (jsonReader.hasNext()) {
+            String key = jsonReader.nextName();
+
+            switch (key) {
+                case "id":
+                    this.id = jsonReader.nextInt();
+                    break;
+                case "name":
+                    this.nome = jsonReader.nextString();
+                    break;
+                case "email":
+                    this.email = jsonReader.nextString();
+                    break;
+                case "cpf":
+                    this.cpf = jsonReader.nextString();
+                    break;
+                default:
+                    jsonReader.skipValue();
+                    break;
+            }
+
+            this.administrador = false;
+        }
+
+        jsonReader.endObject();
     }
 
     public int getId() {
