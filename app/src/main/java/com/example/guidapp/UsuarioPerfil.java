@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guidapp.api.AtualizarUsuarioRunnable;
@@ -26,7 +27,7 @@ public class UsuarioPerfil extends AppCompatActivity {
     private EditText etNome;
     private EditText etSobrenome;
     private EditText etEmail;
-    private Button btSalvar;
+    private TextView tvAviso;
 
     private Usuario usuarioLogado;
 
@@ -42,7 +43,7 @@ public class UsuarioPerfil extends AppCompatActivity {
         etNome = findViewById(R.id.etNome);
         etSobrenome = findViewById(R.id.etSobrenome);
         etEmail = findViewById(R.id.etEmail);
-        btSalvar = findViewById(R.id.btSalvar);
+        tvAviso = findViewById(R.id.tvAviso);
 
         etNome.setText(usuarioLogado.getNome());
         etSobrenome.setText(usuarioLogado.getSobrenome());
@@ -80,6 +81,11 @@ public class UsuarioPerfil extends AppCompatActivity {
         usuarioLogado.setNome(nome);
         usuarioLogado.setSobrenome(sobrenome);
         usuarioLogado.setEmail(email);
+
+        if(nome.equals("") || sobrenome.equals("") || email.equals("")) {
+            tvAviso.setText("Nenhum campo pode ser vazio.");
+            return;
+        }
 
         AsyncTask.execute(new AtualizarUsuarioRunnable(this, usuarioLogado));
         retornoApi = API_UPDATE_ESPERANDO_API;

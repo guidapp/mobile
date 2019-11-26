@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.guidapp.api.CadastroRunnable;
 import com.example.guidapp.api.LoginRunnable;
@@ -21,6 +22,7 @@ public class CadastroUsuario extends AppCompatActivity {
     private int retornoApi;
 
     private EditText etNomeCadastro,etSobrenome, etEmailCadastro, etSenhaCadastro, etConfSenhaCadastro;
+    private TextView tvAviso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class CadastroUsuario extends AppCompatActivity {
         etEmailCadastro = findViewById(R.id.etEmailCadastro);
         etSenhaCadastro = findViewById(R.id.etSenhaCadastro);
         etConfSenhaCadastro = findViewById(R.id.etConfSenhaCadastro);
+        tvAviso = findViewById(R.id.tvAviso);
     }
 
     public void cadastrar (View v) {
@@ -45,12 +48,25 @@ public class CadastroUsuario extends AppCompatActivity {
         senha = etSenhaCadastro.getText().toString();
         confSenha = etConfSenhaCadastro.getText().toString();
 
-        if(senha.equals(confSenha)) {
-            Usuario usuario = new Usuario(0, nome, sobrenome, email, senha, false, null);
-            AsyncTask.execute(new CadastroRunnable(this, usuario));
-            retornoApi = API_CADASTRO_ESPERANDO_API;
-            esperarRespostaLogin();
+        if(nome.equals("") || sobrenome.equals("") || email.equals("") || senha.equals("") || confSenha.equals("")) {
+            tvAviso.setText("Todos os campos são obrigatórios.");
+            return;
         }
+
+        if(senha.length() < 8) {
+            tvAviso.setText("O tamanho mínimo da senha são 8 caracteres.");
+            return;
+        }
+
+        if(! senha.equals(confSenha)) {
+            tvAviso.setText("As senhas devem ser iguais.");
+            return;
+        }
+
+        Usuario usuario = new Usuario(0, nome, sobrenome, email, senha, false, null);
+        AsyncTask.execute(new CadastroRunnable(this, usuario));
+        retornoApi = API_CADASTRO_ESPERANDO_API;
+        esperarRespostaLogin();
     }
 
     private void esperarRespostaLogin() {
