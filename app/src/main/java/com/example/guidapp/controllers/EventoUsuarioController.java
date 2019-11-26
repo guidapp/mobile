@@ -90,6 +90,38 @@ public class EventoUsuarioController {
         }
     }
 
+    public void avaliarEvento(Context context, int idEvento, int idUsuario, float avaliacao) {
+        EventoUsuarioDatabase eventoUsuarioDatabase = new EventoUsuarioDatabase(context);
+
+        EventoUsuario eventoUsuario = getEventoUsuario(idEvento, idUsuario);
+
+        if(eventoUsuario == null) {
+            eventoUsuarioDatabase.inserir(new EventoUsuario(idEvento, idUsuario, false, true, avaliacao));
+        } else {
+            eventoUsuario.setAvaliacao(avaliacao);
+            if(eventoUsuario.getAvaliacao() > 0)
+                eventoUsuario.setVisitou(true);
+            else
+                eventoUsuario.setVisitou(false);
+
+            eventoUsuarioDatabase.atualizarRegistro(idEvento, idUsuario, eventoUsuario);
+        }
+
+        carregarDadosDoBanco(context);
+    }
+
+    public float getAvaliacaoEvento(Context context, int idEvento, int idUsuario) {
+        EventoUsuarioDatabase eventoUsuarioDatabase = new EventoUsuarioDatabase(context);
+
+        EventoUsuario eventoUsuario = getEventoUsuario(idEvento, idUsuario);
+
+        if(eventoUsuario == null) {
+            return 0;
+        } else {
+            return eventoUsuario.getAvaliacao();
+        }
+    }
+
     public boolean localVisitado(double latitude, double longitude) {
         LatLng coord = new LatLng(latitude, longitude);
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -75,8 +76,9 @@ public class EventoUsuarioDatabase extends SQLiteOpenHelper {
                         cursor.getFloat(4) // AVALIACAO
                 );
 
-                if(eventoUsuario.getIdusuario() == idUsuario)
+                if(eventoUsuario.getIdusuario() == idUsuario) {
                     listaRelacoes.add(eventoUsuario);
+                }
             }
         }
         db.close();
