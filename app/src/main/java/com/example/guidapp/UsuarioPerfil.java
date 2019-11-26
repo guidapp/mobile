@@ -3,16 +3,25 @@ package com.example.guidapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.guidapp.api.AtualizarUsuarioRunnable;
+import com.example.guidapp.api.LoginRunnable;
 import com.example.guidapp.controllers.UsuarioController;
 import com.example.guidapp.model.Usuario;
 
 public class UsuarioPerfil extends AppCompatActivity {
+    public static final int API_UPDATE_ESPERANDO_API = 0;
+    public static final int API_UPDATE_ESPERANDO_USUARIO = 1;
+    public static final int API_UPDATE_SUCESSO = 2;
+    public static final int API_UPDATE_ERRO = 3;
+
+    private int retornoApi;
 
     private EditText etNome;
     private EditText etSobrenome;
@@ -25,6 +34,8 @@ public class UsuarioPerfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_perfil);
+
+        retornoApi = API_UPDATE_ESPERANDO_USUARIO;
 
         usuarioLogado = UsuarioController.getInstance().getUsuarioLogado();
 
@@ -66,10 +77,30 @@ public class UsuarioPerfil extends AppCompatActivity {
         String sobrenome = etSobrenome.getText().toString();
         String email = etEmail.getText().toString();
 
-        UsuarioController.getInstance().atualizarDados(this, nome, sobrenome, email);
+        usuarioLogado.setNome(nome);
+        usuarioLogado.setSobrenome(sobrenome);
+        usuarioLogado.setEmail(email);
+
+        AsyncTask.execute(new AtualizarUsuarioRunnable(this, usuarioLogado));
+        retornoApi = API_UPDATE_ESPERANDO_API;
+        esperarRespostaUpdate();
+    }
+
+    private void esperarRespostaUpdate() {
+        while (retornoApi == API_UPDATE_ESPERANDO_API) {
+        }
+
+        switch (retornoApi) {
+            case API_UPDATE_SUCESSO:
+                UsuarioController.getInstance().atualizarDados(this, usuarioLogado.getNome(), usuarioLogado.getSobrenome(), usuarioLogado.getEmail());
+        }
 
         // RECARREGAR A ACTIVITY ATUAL
         finish();
         startActivity(getIntent());
+    }
+
+    public void setRetornoApi(int retornoApi) {
+        this.retornoApi = retornoApi;
     }
 }

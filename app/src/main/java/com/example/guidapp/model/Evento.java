@@ -1,5 +1,11 @@
 package com.example.guidapp.model;
 
+import android.util.JsonReader;
+import android.util.Log;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -27,24 +33,95 @@ public class Evento implements Comparable<Evento> {
         this.dataHora = dataHora;
     }
 
-    public Evento(int id, String nome, int avaliacao, double latitude, double longitude, String endereco, Calendar dataHora) {
-        this.id = id;
-        this.nome = nome;
-        this.avaliacao = avaliacao;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.endereco = endereco;
-        this.dataHora = dataHora;
+    public Evento(int id, String nome, float avaliacao, double latitude, double longitude, String endereco, Calendar dataHora) {
+        this(id, nome, "descrição....", avaliacao, 0, latitude, longitude, endereco, dataHora);
     }
 
     public Evento(int id, String nome) {
-        this.id = id;
-        this.nome = nome;
-        this.avaliacao = 3;
-        this.latitude = 2.222;
-        this.longitude = 4.444;
-        this.endereco = "Rua 7";
-        this.dataHora = Calendar.getInstance();
+        this(id, nome, "descrição....", 3, 0, 2.222, 4.444, "Rua 7", Calendar.getInstance());
+    }
+
+    public Evento(JsonReader jsonReader) throws IOException {
+        String hora = "";
+        String data = "";
+
+        jsonReader.beginObject();
+
+        while (jsonReader.hasNext()) {
+            String key = jsonReader.nextName();
+
+            switch (key) {
+                case "id":
+                    this.id = jsonReader.nextInt();
+                    break;
+                case "nome":
+                    this.nome = jsonReader.nextString();
+                    break;
+                case "descricao":
+                    this.descricao = jsonReader.nextString();
+                    break;
+                case "hora":
+                    hora = jsonReader.nextString();
+                    break;
+                case "evento_unico":
+                    jsonReader.beginObject();
+                    while (jsonReader.hasNext()) {
+                        String key2 = jsonReader.nextName();
+
+                        switch (key2) {
+                            case "latitude":
+                                this.latitude = Double.parseDouble(jsonReader.nextString());
+                                break;
+                            case "longitude":
+                                this.longitude = Double.parseDouble((jsonReader.nextString()));
+                                break;
+                            case "data":
+                                data = jsonReader.nextString();
+                                break;
+                            case "evento":
+                                jsonReader.beginObject();
+                                while (jsonReader.hasNext()) {
+                                    String key3 = jsonReader.nextName();
+
+                                    switch (key3) {
+                                        case "avaliacao":
+                                            this.avaliacao = Integer.parseInt(jsonReader.nextString());
+                                            break;
+                                        case "visitas":
+                                            this.visitas = jsonReader.nextInt();
+                                            break;
+                                        default:
+                                            jsonReader.skipValue();
+                                            break;
+                                    }
+                                }
+                                jsonReader.endObject();
+                                break;
+                            default:
+                                jsonReader.skipValue();
+                                break;
+                        }
+                    }
+                    jsonReader.endObject();
+                    break;
+                default:
+                    jsonReader.skipValue();
+                    break;
+            }
+        }
+
+        jsonReader.endObject();
+
+        String dataHora = data + " " + hora;
+        if(!data.equals("") && !hora.equals("")) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            this.dataHora = Calendar.getInstance();
+            try {
+                this.dataHora.setTime(sdf.parse(dataHora));
+            } catch (ParseException e) {
+                Log.e("EVENTO", "Erro na criação do evento. " + e.getMessage());
+            }
+        }
     }
 
     public String getDataHoraFormatada() {

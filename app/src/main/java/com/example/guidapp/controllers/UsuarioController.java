@@ -1,6 +1,7 @@
 package com.example.guidapp.controllers;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.guidapp.database.UsuarioDatabase;
 import com.example.guidapp.exceptions.ConfirmacaoDeSenhaInvalidaException;

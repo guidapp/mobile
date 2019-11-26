@@ -6,64 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".CadastroUsuario">
 
-    <EditText
-        android:id="@+id/etNomeCadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        android:ems="10"
-        android:hint="Nome"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.66"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etSenhaCadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Senha"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailCadastro" />
-
-    <EditText
-        android:id="@+id/etEmailCadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="E-mail"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNomeCadastro" />
-
-    <Button
-        android:id="@+id/btIncluirFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Incluir foto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivFotoCadastro" />
-
-    <ImageView
-        android:id="@+id/ivFotoCadastro"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etConfSenhaCadastro"
-        app:srcCompat="@android:drawable/presence_video_online" />
-
     <Button
         android:id="@+id/btCadastrar"
         android:layout_width="0dp"
@@ -74,16 +16,87 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/etConfSenhaCadastro"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Confirmação da senha"
-        android:inputType="textPassword"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etSenhaCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCadastro">
+
+        <EditText
+            android:id="@+id/etNomeCadastro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.66"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etSenhaCadastro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:hint="Senha"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/etEmailCadastro"
+            app:layout_constraintStart_toStartOf="@+id/etEmailCadastro"
+            app:layout_constraintTop_toBottomOf="@+id/etEmailCadastro" />
+
+        <EditText
+            android:id="@+id/etEmailCadastro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:hint="E-mail"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="@+id/etSobrenome"
+            app:layout_constraintStart_toStartOf="@+id/etSobrenome"
+            app:layout_constraintTop_toBottomOf="@+id/etSobrenome" />
+
+        <EditText
+            android:id="@+id/etConfSenhaCadastro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:hint="Confirmação da senha"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/etSenhaCadastro"
+            app:layout_constraintStart_toStartOf="@+id/etSenhaCadastro"
+            app:layout_constraintTop_toBottomOf="@+id/etSenhaCadastro" />
+
+        <EditText
+            android:id="@+id/etSobrenome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:ems="10"
+            android:hint="Sobrenome"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/etNomeCadastro"
+            app:layout_constraintStart_toStartOf="@+id/etNomeCadastro"
+            app:layout_constraintTop_toBottomOf="@+id/etNomeCadastro" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Cadastro"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -97,7 +97,9 @@ public class EventoDatabase extends SQLiteOpenHelper {
         valores.put(LATITUDE, evento.getLatitude());
         valores.put(LONGITUDE, evento.getLongitude());
         valores.put(ENDERECO, evento.getEndereco());
-        valores.put(DATAHORA, evento.getDataHora().getTimeInMillis());
+
+        if(evento.getDataHora() != null)
+            valores.put(DATAHORA, evento.getDataHora().getTimeInMillis());
 
         resultado = db.insert(TABELA, null, valores);
         db.close();

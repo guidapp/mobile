@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -38,7 +39,7 @@ public class UsuarioDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE "+TABELA+"("
-                + ID + " integer primary key autoincrement, "
+                + ID + " integer primary key, "
                 + NOME + " text, "
                 + SOBRENOME + " text, "
                 + EMAIL + " text, "
@@ -95,6 +96,7 @@ public class UsuarioDatabase extends SQLiteOpenHelper {
 
         db = this.getWritableDatabase();
         valores = new ContentValues();
+        valores.put(ID, usuario.getId());
         valores.put(NOME, usuario.getNome());
         valores.put(SOBRENOME, usuario.getSobrenome());
         valores.put(EMAIL, usuario.getEmail());

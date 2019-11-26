@@ -50,6 +50,9 @@ public class Usuario {
                 case "name":
                     this.nome = jsonReader.nextString();
                     break;
+                case "surname":
+                    this.sobrenome = jsonReader.nextString();
+                    break;
                 case "email":
                     this.email = jsonReader.nextString();
                     break;
@@ -121,5 +124,29 @@ public class Usuario {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String toJson(String parametoAdicional) {
+        String json = "{";
+        json += "\"name\" : \"" + nome + "\", ";
+        json += "\"surname\" : \"" + sobrenome + "\", ";
+        json += "\"email\" : \"" + email + "\"";
+
+        if(senha != null)
+            json += ", \"password\" : \"" + senha + "\"";
+
+        if(cpf != null)
+            json += ", \"cpf\" : \"" + cpf + "\"";
+
+        if(parametoAdicional != null)
+            json += ", " + parametoAdicional;
+
+        json += "}";
+
+        return json;
+    }
+
+    public String toJson() {
+        return this.toJson(null);
     }
 }

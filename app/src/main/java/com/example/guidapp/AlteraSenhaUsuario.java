@@ -2,18 +2,19 @@ package com.example.guidapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.guidapp.api.LoginRunnable;
 import com.example.guidapp.controllers.UsuarioController;
 import com.example.guidapp.exceptions.ConfirmacaoDeSenhaInvalidaException;
 import com.example.guidapp.exceptions.SenhaInvalidaException;
 import com.example.guidapp.exceptions.SenhaTamanhoInvalidoException;
 
 public class AlteraSenhaUsuario extends AppCompatActivity {
-
     EditText etSenhaAtual;
     EditText etNovaSenha;
     EditText etConfirmarSenha;
