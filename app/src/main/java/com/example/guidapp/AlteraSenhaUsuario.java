@@ -6,27 +6,36 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.example.guidapp.api.LoginRunnable;
+import com.example.guidapp.api.AtualizarSenhaRunnable;
 import com.example.guidapp.controllers.UsuarioController;
-import com.example.guidapp.exceptions.ConfirmacaoDeSenhaInvalidaException;
-import com.example.guidapp.exceptions.SenhaInvalidaException;
-import com.example.guidapp.exceptions.SenhaTamanhoInvalidoException;
 
 public class AlteraSenhaUsuario extends AppCompatActivity {
-    EditText etSenhaAtual;
-    EditText etNovaSenha;
-    EditText etConfirmarSenha;
+    public static final int API_UPDATE_SENHA_ESPERANDO_API = 0;
+    public static final int API_UPDATE_SENHA_ESPERANDO_USUARIO = 1;
+    public static final int API_UPDATE_SENHA_SUCESSO = 2;
+    public static final int API_UPDATE_SENHA_ERRO = 3;
+    public static final int API_UPDATE_SENHA_NAO_AUTORIZADO = 4;
+
+    private EditText etSenhaAtual;
+    private EditText etNovaSenha;
+    private EditText etConfirmarSenha;
+    private TextView tvAviso;
+
+    private int retornoApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_altera_senha_usuario);
 
+        retornoApi = API_UPDATE_SENHA_ESPERANDO_USUARIO;
+
         etSenhaAtual = findViewById(R.id.etSenhaAtual);
         etNovaSenha = findViewById(R.id.etNovaSenha);
         etConfirmarSenha = findViewById(R.id.etConfirmarSenha);
+        tvAviso = findViewById(R.id.tvAviso);
     }
 
     public void salvar (View v) {
@@ -36,18 +45,36 @@ public class AlteraSenhaUsuario extends AppCompatActivity {
         String novaSenha = etNovaSenha.getText().toString();
         String confirmarSenha = etConfirmarSenha.getText().toString();
 
-        try {
-            usuarioController.atualizarSenha(this, senhaAtual, novaSenha, confirmarSenha);
-
-            Toast.makeText(this, "Senha salva com sucesso", Toast.LENGTH_LONG).show();
-
-            finish();
-        } catch (SenhaInvalidaException e) {
-            Toast.makeText(this, "Senha incorreta.", Toast.LENGTH_LONG).show();
-        } catch (ConfirmacaoDeSenhaInvalidaException e) {
-            Toast.makeText(this, "A nova senha e a confirmação da senha devem ser iguais.", Toast.LENGTH_LONG).show();
-        } catch (SenhaTamanhoInvalidoException e) {
-            Toast.makeText(this, "A nova senha deve ter no mínimo 8 carecteres.", Toast.LENGTH_LONG).show();
+        if(! novaSenha.equals(confirmarSenha)) {
+            tvAviso.setText("A nova senha e a confirmação da senha devem ser iguais.");
+        } else if(novaSenha.length() < 8) {
+            tvAviso.setText("O tamanho minimo da nova senha e 8.");
+        } else {
+            AsyncTask.execute(new AtualizarSenhaRunnable(this, senhaAtual, novaSenha));
+            retornoApi = API_UPDATE_SENHA_ESPERANDO_API;
+            esperarRespostaUpdate();
         }
+    }
+
+    private void esperarRespostaUpdate() {
+        while (retornoApi == API_UPDATE_SENHA_ESPERANDO_API) {
+        }
+
+        switch (retornoApi) {
+            case API_UPDATE_SENHA_NAO_AUTORIZADO:
+                tvAviso.setText("Senha incorreta.");
+                break;
+            case API_UPDATE_SENHA_ERRO:
+                tvAviso.setText("Erro no servidor.");
+                break;
+            case API_UPDATE_SENHA_SUCESSO:
+                UsuarioController.getInstance().carregarUsuarioDoBanco(this);
+                finish();
+                break;
+        }
+    }
+
+    public void setRetornoApi(int retornoApi) {
+        this.retornoApi = retornoApi;
     }
 }
