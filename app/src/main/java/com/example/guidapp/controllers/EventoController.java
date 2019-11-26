@@ -2,6 +2,7 @@ package com.example.guidapp.controllers;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.guidapp.database.EventoDatabase;
@@ -40,6 +41,17 @@ public class EventoController {
         listaEventos = eventoDatabase.listar();
     }
 
+    public void atualizarDados(Context context) {
+        carregarDadosDoBanco(context);
+        ArrayList<Integer> listaIdEventosRoteiro = EventoUsuarioController.getInstance().getIdEventosRoteiro(context);
+
+        eventosRoteiro = new ArrayList<>();
+
+        for (Integer id : listaIdEventosRoteiro) {
+            eventosRoteiro.add(getEventoById(id));
+        }
+    }
+
     public void atualizarBancoLocal(Context context, ArrayList<Evento> eventos) {
         EventoDatabase eventoDatabase = new EventoDatabase(context);
         eventoDatabase.zerarTabela();
@@ -63,12 +75,18 @@ public class EventoController {
         return null;
     }
 
-    public void addEventoAoRoteiro(int idEvento) {
+    public void addEventoAoRoteiro(Context context, int idEvento) {
+        EventoUsuarioController eventoUsuarioController = EventoUsuarioController.getInstance();
+        eventoUsuarioController.addEventoRoteiro(context, idEvento, UsuarioController.getInstance().getUsuarioLogado().getId());
+
         eventosRoteiro.add(getEventoById(idEvento));
         Collections.sort(eventosRoteiro);
     }
 
-    public void removerEventoRoteiro(int idEvento) {
+    public void removerEventoRoteiro(Context context, int idEvento) {
+        EventoUsuarioController eventoUsuarioController = EventoUsuarioController.getInstance();
+        eventoUsuarioController.removerEventoRoteiro(context, idEvento, UsuarioController.getInstance().getUsuarioLogado().getId());
+
         eventosRoteiro.remove(getEventoById(idEvento));
         Collections.sort(eventosRoteiro);
     }

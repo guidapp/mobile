@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.guidapp.controllers.EventoController;
+import com.example.guidapp.controllers.EventoUsuarioController;
+import com.example.guidapp.controllers.UsuarioController;
 import com.example.guidapp.model.Evento;
 
 public class DescricaoEvento extends AppCompatActivity {
@@ -22,6 +24,7 @@ public class DescricaoEvento extends AppCompatActivity {
 
     private Evento evento;
     private EventoController eventoController;
+    private EventoUsuarioController eventoUsuarioController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class DescricaoEvento extends AppCompatActivity {
         btActionRoteiro = findViewById(R.id.btActionRoteiro);
 
         eventoController = EventoController.getInstance();
+        eventoUsuarioController = EventoUsuarioController.getInstance();
         evento = eventoController.getEventoById(getIntent().getIntExtra("idEvento", 0));
 
         tvNome.setText(evento.getNome());
@@ -53,9 +57,9 @@ public class DescricaoEvento extends AppCompatActivity {
 
     public void actionEventoRoteiro(View v) {
         if(eventoController.eventoNoRoteiro(evento.getId())) {
-            eventoController.removerEventoRoteiro(evento.getId());
+            eventoController.removerEventoRoteiro(this, evento.getId());
         } else {
-            eventoController.addEventoAoRoteiro(evento.getId());
+            eventoController.addEventoAoRoteiro(this, evento.getId());
         }
 
         Intent intent = new Intent(this, Roteiro.class);

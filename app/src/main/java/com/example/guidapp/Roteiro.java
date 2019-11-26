@@ -41,6 +41,7 @@ public class Roteiro extends AppCompatActivity {
         this.listaItens = new ArrayList<>();
 
         this.eventoController = EventoController.getInstance();
+        this.eventoController.atualizarDados(this);
 
         btAddEvento.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -84,7 +85,7 @@ public class Roteiro extends AppCompatActivity {
     }
 
     public void removerEvento (int idEvento) {
-        eventoController.removerEventoRoteiro(idEvento);
+        eventoController.removerEventoRoteiro(this, idEvento);
 
         this.listaItens = new ArrayList<>();
         this.listaTracos = new ArrayList<>();

@@ -1,7 +1,9 @@
 package com.example.guidapp.controllers;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.example.guidapp.database.EventoDatabase;
 import com.example.guidapp.database.EventoUsuarioDatabase;
 import com.example.guidapp.database.UsuarioDatabase;
 import com.example.guidapp.model.Evento;
@@ -39,6 +41,53 @@ public class EventoUsuarioController {
         }
 
         return false;
+    }
+
+    public ArrayList<Integer> getIdEventosRoteiro(Context context) {
+        carregarDadosDoBanco(context);
+
+        ArrayList<Integer> eventos = new ArrayList<>();
+
+        for (EventoUsuario eventoUsuario : eventosUsuarios) {
+            if(eventoUsuario.isRoteiro()) {
+                eventos.add(eventoUsuario.getIdevento());
+            }
+        }
+
+        return eventos;
+    }
+
+    public EventoUsuario getEventoUsuario(int idEvento, int idUsuario) {
+        for (EventoUsuario eventoUsuario : eventosUsuarios) {
+            if (eventoUsuario.getIdusuario() == idUsuario && eventoUsuario.getIdevento() == idEvento)
+                return eventoUsuario;
+        }
+
+        return null;
+    }
+
+    public void addEventoRoteiro(Context context, int idEvento, int idUsuario) {
+        EventoUsuarioDatabase eventoUsuarioDatabase = new EventoUsuarioDatabase(context);
+
+        EventoUsuario eventoUsuario = getEventoUsuario(idEvento, idUsuario);
+
+        if(eventoUsuario == null) {
+            eventoUsuarioDatabase.inserir(new EventoUsuario(idEvento, idUsuario, true, false, 0));
+        } else {
+            eventoUsuario.setRoteiro(true);
+            eventoUsuarioDatabase.atualizarRegistro(idEvento, idUsuario, eventoUsuario);
+        }
+    }
+
+    public void removerEventoRoteiro(Context context, int idEvento, int idUsuario) {
+        EventoUsuarioDatabase eventoUsuarioDatabase = new EventoUsuarioDatabase(context);
+
+        EventoUsuario eventoUsuario = getEventoUsuario(idEvento, idUsuario);
+
+        if(eventoUsuario != null) {
+            eventoUsuario.setRoteiro(false);
+            eventoUsuarioDatabase.atualizarRegistro(idEvento, idUsuario, eventoUsuario);
+        }
     }
 
     public boolean localVisitado(double latitude, double longitude) {

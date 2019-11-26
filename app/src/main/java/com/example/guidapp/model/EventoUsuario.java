@@ -60,6 +60,7 @@ public class EventoUsuario {
     }
 
     public void setAvaliacao(float avaliacao) {
+        this.visitou = true;
         this.avaliacao = avaliacao;
     }
 }

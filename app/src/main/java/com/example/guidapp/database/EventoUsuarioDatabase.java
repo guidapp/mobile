@@ -34,12 +34,13 @@ public class EventoUsuarioDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE "+TABELA+"("
-                + ID_EVENTO + " integer primary key, "
-                + ID_USUARIO + " integer primary key, "
+        String sql = "CREATE TABLE IF NOT EXISTS "+TABELA+"("
+                + ID_EVENTO + " integer , "
+                + ID_USUARIO + " integer , "
                 + ROTEIRO + " integer, "
                 + VISITOU + " integer, "
                 + AVALIACAO + " integer, "
+                + "PRIMARY KEY (" + ID_EVENTO + ", " + ID_USUARIO + ") "
                 +")";
         db.execSQL(sql);
     }
@@ -55,6 +56,8 @@ public class EventoUsuarioDatabase extends SQLiteOpenHelper {
     }
 
     public ArrayList<EventoUsuario> listar(int idUsuario){
+        onCreate(this.getWritableDatabase());
+
         ArrayList<EventoUsuario> listaRelacoes = new ArrayList<>();
         Cursor cursor;
         String[] campos =  {ID_EVENTO, ID_USUARIO, ROTEIRO, VISITOU, AVALIACAO};
@@ -72,7 +75,8 @@ public class EventoUsuarioDatabase extends SQLiteOpenHelper {
                         cursor.getFloat(4) // AVALIACAO
                 );
 
-                listaRelacoes.add(eventoUsuario);
+                if(eventoUsuario.getIdusuario() == idUsuario)
+                    listaRelacoes.add(eventoUsuario);
             }
         }
         db.close();
@@ -96,5 +100,22 @@ public class EventoUsuarioDatabase extends SQLiteOpenHelper {
         db.close();
 
         return resultado != -1;
+    }
+
+    public void atualizarRegistro(int idEvento, int idUsuario, EventoUsuario eventoUsuario){
+        ContentValues valores;
+        String where;
+
+        db = this.getWritableDatabase();
+
+        where = ID_EVENTO + "=" + idEvento + " AND " + ID_USUARIO + "=" + idUsuario;
+
+        valores = new ContentValues();
+        valores.put(ROTEIRO, eventoUsuario.isRoteiro());
+        valores.put(VISITOU, eventoUsuario.isVisitou());
+        valores.put(AVALIACAO, eventoUsuario.getAvaliacao());
+
+        db.update(TABELA,valores,where,null);
+        db.close();
     }
 }

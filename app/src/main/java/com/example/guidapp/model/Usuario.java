@@ -58,7 +58,11 @@ public class Usuario {
                     this.email = jsonReader.nextString();
                     break;
                 case "cpf":
-                    this.cpf = jsonReader.nextString();
+                    try {
+                        this.cpf = jsonReader.nextString();
+                    } catch (IllegalStateException e) {
+                        jsonReader.nextNull();
+                    }
                     break;
                 default:
                     jsonReader.skipValue();
