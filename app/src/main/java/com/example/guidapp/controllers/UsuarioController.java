@@ -1,12 +1,13 @@
 package com.example.guidapp.controllers;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.example.guidapp.database.EventoUsuarioDatabase;
 import com.example.guidapp.database.UsuarioDatabase;
 import com.example.guidapp.exceptions.ConfirmacaoDeSenhaInvalidaException;
 import com.example.guidapp.exceptions.SenhaInvalidaException;
 import com.example.guidapp.exceptions.SenhaTamanhoInvalidoException;
+import com.example.guidapp.model.EventoUsuario;
 import com.example.guidapp.model.Usuario;
 
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ public class UsuarioController {
 
     private static UsuarioController instance = null;
 
-    private UsuarioController() {}
+    private UsuarioController() {
+    }
 
     public static UsuarioController getInstance() {
         if(instance == null)

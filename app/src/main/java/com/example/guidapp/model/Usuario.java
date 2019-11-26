@@ -1,7 +1,8 @@
 package com.example.guidapp.model;
 
 import android.util.JsonReader;
-import android.util.Log;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.util.ArrayList;

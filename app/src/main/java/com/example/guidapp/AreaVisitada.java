@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.guidapp.controllers.EventoController;
+import com.example.guidapp.controllers.EventoUsuarioController;
 import com.example.guidapp.model.Evento;
+import com.example.guidapp.model.EventoUsuario;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ public class AreaVisitada extends AppCompatActivity {
     ConstraintLayout listaEventoView;
 
     EventoController eventoController;
+    EventoUsuarioController eventoUsuarioController;
     private ArrayList<ItemListaEventos> listaItensEvento;
 
     private int marginDefault = 40;
@@ -30,12 +33,13 @@ public class AreaVisitada extends AppCompatActivity {
         setContentView(R.layout.activity_area_visitada);
 
         eventoController = EventoController.getInstance();
+        eventoUsuarioController = EventoUsuarioController.getInstance();
         listaItensEvento = new ArrayList<>();
 
         listaEventoView = findViewById(R.id.listaEventosView);
         tvPorcentagem = findViewById(R.id.tvPorcentagem);
 
-        tvPorcentagem.setText(eventoController.porcentagemLocaisVisitados() + " %");
+        tvPorcentagem.setText(eventoUsuarioController.porcentagemLocaisVisitados() + " %");
 
         construirLista();
     }
@@ -66,7 +70,7 @@ public class AreaVisitada extends AppCompatActivity {
 
     private void construirLista() {
         for (Evento evento : eventoController.listaEventos){
-            if(eventoController.eventoNoRoteiro(evento.getId()) || eventoController.localVisitado(evento.getLatitude(), evento.getLongitude()) || eventoController.eventoPassado(evento)) {
+            if(eventoController.eventoNoRoteiro(evento.getId()) || eventoUsuarioController.localVisitado(evento.getLatitude(), evento.getLongitude()) || eventoController.eventoPassado(evento)) {
                 continue;
             }
 

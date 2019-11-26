@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.guidapp.controllers.EventoController;
+import com.example.guidapp.controllers.EventoUsuarioController;
 import com.example.guidapp.model.Evento;
 
 import java.util.ArrayList;
@@ -45,9 +46,10 @@ public class ListaEventos extends AppCompatActivity {
 
     private void construirLista() {
         EventoController eventoController = EventoController.getInstance();
+        EventoUsuarioController eventoUsuarioController = EventoUsuarioController.getInstance();
 
         for (Evento evento : eventoController.listaEventos){
-            if(eventoController.eventoNoRoteiro(evento.getId()) || eventoController.eventoVisitado(evento.getId()) || eventoController.eventoPassado(evento)) {
+            if(eventoController.eventoNoRoteiro(evento.getId()) || eventoUsuarioController.eventoVisitado(evento.getId()) || eventoController.eventoPassado(evento)) {
                 continue;
             }
 

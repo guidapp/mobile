@@ -34,7 +34,7 @@ public class EventoDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE "+TABELA+"("
-                + ID + " integer primary key autoincrement, "
+                + ID + " integer primary key, "
                 + NOME + " text, "
                 + AVALIACAO + " integer, "
                 + LATITUDE + " real, "
@@ -92,6 +92,7 @@ public class EventoDatabase extends SQLiteOpenHelper {
 
         db = this.getWritableDatabase();
         valores = new ContentValues();
+        valores.put(ID, evento.getId());
         valores.put(NOME, evento.getNome());
         valores.put(AVALIACAO, evento.getAvaliacao());
         valores.put(LATITUDE, evento.getLatitude());
