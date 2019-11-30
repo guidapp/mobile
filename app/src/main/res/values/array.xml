@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="opcoes_evento_roteiro">
+        <item>Ver evento</item>
+        <item>Remover do roteiro</item>
+        <item>Voltar</item>
+    </string-array>
+</resources>
